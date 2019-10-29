@@ -1,6 +1,6 @@
 ---
-title: "Student Sit In"
-author: "your name here"
+title: "Student Sit in"
+author: "Melissa Markakis"
 date: "10/26/2019"
 output: 
   html_document:
@@ -20,15 +20,16 @@ Students at UCD- is there a relation between where one sits and one's major?
 
 ## Introduction  
 
-<!-- where is the data found?  Is this and experiment or observational study?  !-->
+<!-- where is the data found?  Is this an experiment or an observational study?  !-->
 
 Data from this study came from... 
 
+The data came from a study of 173 student at UC Davis.
 
 
 ```{r include=FALSE, echo=FALSE}
 library(tigerstats)
-data(Ucdavis1)
+data(ucdavis1)
 
 ```
 
@@ -37,7 +38,9 @@ $H_A$: where one sits in class and one's major are related
 
 <!-- Get the data: !-->
 
-names of the data in the data frame
+
+
+The names in the data frame are Seat and class.  
 
 ```{r echo=FALSE}
 UCDdataframe = data.frame(seat=ucdavis1$Seat, major=ucdavis1$class, data=ucdavis1)
@@ -48,44 +51,47 @@ names(UCDdataframe)
 <!--  describe analysis methods here 
 what are the variable types, and indicate gaphical, numerical, and inferential methods appropriate
 for this question  !--> 
-
+ 
+ Both variables are categorical. We will do a bar chart for graphical data. For numerical methods we use a tables chart. Finally, we use a Chi- Squared test for our inferential method.  
 
 ## Data summary
 
 **Graphical summary**
-put the graphic description of the data here
+
 
 ```{r}
-
+barchartGC(~Seat+class, data=ucdavis1, main = 'Seat v.s Class', type = 'percent', xlab = ' Seat')
 ```
 
-Explain what the graph shows
+The bar chart suggests that there is no connection between where one sits and ones major. Liberal Arts majoring students appear to sit almost equally in the front, middle and back of the class but do prefer the front just a little bit more. Non-Liberal Arts student appear to prefer to sit in the back but are nearly equal accross the bar.  
 
 
 **Numerical summary**
-put numerical summary here
+
 
 ```{r}
-
+tab1 = xtabs(~Seat+class, data=ucdavis1)
+rowPerc(tab1)
 ```
 
-Explain what the numeric summary says
+The numerical tables Summary suggests that Liberal Arts students prefer to sit more in the front of the classroom but the non liberal arts students appear to prefer the back of the classroom.  
 
 ## Inferential Results
-put the inferential test for the the null hypothesis here
+
 
 ```{r}
-
+chisqtestGC(tab1)
 ```
 
-what is the p-value?
+
+The p-value is 0.2173 > 0.05 suggest that there is no connection between where one sits and ones major.   
 
 ## Results and conclusions
 
 <!-- explain-- is there evidence that certain majors tend to sit in particular areas of the class?  Can the results of this test be generalized to all majors in all universities? !-->
 
-explain the result, can the result be generalized?
 
+The p-value for the Chisq test is 0.2173 > 0.05 so we fail to reject the null hypothesis and conclude do we have enpugh evidence to support the contention that ones major and where one sits is related. It appears ones choise of seating is not related to ones choice of major.  
 <!--
 push results to your github account, turn in the URL
 
